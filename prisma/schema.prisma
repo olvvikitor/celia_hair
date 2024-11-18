@@ -24,24 +24,24 @@ model Servico{
   nome String 
   preco Float
   duracao Float
-  fotoId Int 
+  // fotoId Int 
   Agendamento Agendamento[]
-  Fotos Fotos[]
+  // Fotos Fotos[]
 }
 
-model Fotos{
-  id Int @id @default(autoincrement())@unique
-  url String
-  path String
-  servico Servico @relation(fields: [servicoId], references: [id])
-  servicoId Int
-}
+// model Fotos{
+//   id Int @id @default(autoincrement())@unique
+//   url String
+//   path String
+//   servico Servico @relation(fields: [servicoId], references: [id])
+//   servicoId Int
+// }
 
 model Agendamento{
   id Int @id @default(autoincrement()) @unique
   data DateTime 
   realizado Boolean @default(false)
-  servico Servico @relation(fields: [servicoId], references: [id])
+  servico Servico? @relation(fields: [servicoId], references: [id])
   servicoId Int 
   cliente Cliente? @relation(fields: [clienteId], references: [id])
   clienteId Int

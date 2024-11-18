@@ -4,7 +4,7 @@ export class Cliente {
   @IsNotEmpty()
   id: any
   @IsString() @IsNotEmpty()
-  name: string 
+  nome: string 
   @IsEmail() @IsNotEmpty()
   email: string 
 }

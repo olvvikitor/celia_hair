@@ -2,20 +2,22 @@ import { ClienteRepository } from 'src/cliente/infra/prisma/repositories/cliente
 import { CreateClientDto } from '../dto/create-client-dto';
 import { Cliente } from '../entities/cliente';
 import { Inject, Injectable } from '@nestjs/common';
+import { IClienteRepository } from '../repositories/core.cliente..repository';
 
 @Injectable()
 export class ClienteService{
-  constructor (@Inject() private clienteRepository : ClienteRepository) {
+  constructor (@Inject('IClienteRepository') private clienteRepository : IClienteRepository<Cliente> ) {
   }
   async create(createClientDto : CreateClientDto):Promise<Cliente>{
 
-    const cliente = await this.clienteRepository.create({
+    const cliente:Cliente = await this.clienteRepository.create({
       email: createClientDto.email,
-      nome: createClientDto.name
+      nome: createClientDto.nome
     })
+    
     return{
       email: cliente.email,
-      name: cliente.nome,
+      nome: cliente.nome,
       id: cliente.id
     }
   }

@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Cliente, Prisma } from '@prisma/client';
-import { PrismaService } from 'src/infra/prisma/prisma.service';
+import { IClienteRepository } from 'src/cliente/core/repositories/core.cliente..repository';
+import { PrismaService } from 'src/shared/infra/prisma/prisma.service';
 
 @Injectable()
-export class ClienteRepository{
+export class ClienteRepository implements IClienteRepository<Cliente>{
   constructor (
     @Inject()
     private prismaService : PrismaService) {}
