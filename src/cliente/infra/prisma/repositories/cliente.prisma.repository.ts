@@ -8,6 +8,13 @@ export class ClienteRepository implements IClienteRepository<Cliente>{
   constructor (
     @Inject()
     private prismaService : PrismaService) {}
+  async findById(id: any): Promise<Cliente> {
+   return await this.prismaService.cliente.findUnique({
+    where:{
+      id: id
+    }
+   }) 
+  }
   async create(data: Prisma.ClienteCreateInput):Promise<Cliente>{
     return await this.prismaService.cliente.create({data})
   }

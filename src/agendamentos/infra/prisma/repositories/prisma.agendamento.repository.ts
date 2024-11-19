@@ -11,6 +11,12 @@ export class PrismaAgendamentoRepository implements IAgendamentoRepository<Agend
     private prismaService :PrismaService) {}
 
 
+  async findAll(): Promise<Agendamento[]> {
+    return await this.prismaService.agendamento.findMany({
+      where: {realizado:false}
+    })
+  }
+
     async findByDia(inicioDia: Date, finalDia:Date): Promise<Agendamento[]> {
       return await this.prismaService.agendamento.findMany({
         where:{
